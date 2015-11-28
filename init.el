@@ -7,7 +7,7 @@
 (setq auto-save-list-file-name nil)
 (setq auto-save-default nil)
 
-(add-to-list 'load-path "~/plugins")
+(add-to-list 'load-path "/home/roman/Kr_emacs/plugins")
 
 (require 'linum+)
 (setq linum-format "%d")
@@ -18,5 +18,14 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; List of additional LaTeX packages
+;(add-to-list 'org-export-latex-packages-alist '("" "cmap" t))
+;(add-to-list 'org-export-latex-packages-alist '("english,russian" "babel" t))
+
 ;;Auto-complete
 
+;(add-to-list 'ac-dictionary-directories "~/plugins/dict")
+(require 'auto-complete-config)
+(ac-config-default)
