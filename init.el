@@ -21,14 +21,21 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+
 ;; List of additional LaTeX packages
 ;(add-to-list 'org-export-latex-packages-alist '("" "cmap" t))
 ;(add-to-list 'org-export-latex-packages-alist '("english,russian" "babel" t))
 
 ;;Auto-complete
 
-;(add-to-list 'ac-dictionary-directories "~/plugins/dict")
+
 (require 'auto-complete-config)
 (ac-config-default)
 
-;python-mode
+;;webkit
+
+(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/webkit")
+(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-epc")
+(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-deferred")
+(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-ctable")
+(require 'webkit)
