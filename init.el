@@ -1,6 +1,7 @@
 
 (setq show-paren-style 'expression)
 (show-paren-mode 2)
+(setq org-src-fontify-natively t)
 
 (tool-bar-mode -1)
 (setq make-backup-files nil)
@@ -29,3 +30,5 @@
 ;(add-to-list 'ac-dictionary-directories "~/plugins/dict")
 (require 'auto-complete-config)
 (ac-config-default)
+
+;python-mode
