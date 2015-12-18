@@ -10,6 +10,7 @@
 
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins")
 
+
 (require 'linum+)
 (setq linum-format "%d")
 (global-linum-mode 1)
@@ -39,3 +40,9 @@
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-deferred")
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-ctable")
 (require 'webkit)
+
+
+;;org-mode upgrade
+
+(setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "FEEDBACK" "|" "DONE" "CANCELED")))
+(setq org-src-fontify-natively 't)
