@@ -53,15 +53,17 @@
 ;(eval-after-load "LilyPond-mode" (load-library "ac-lilypond"))
 
 ;;webkit
-
-(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/webkit")
+;; Don't need anymore
+;;(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/webkit")
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-epc")
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-deferred")
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-ctable")
-(require 'webkit)
+;;(require 'webkit)
 
 
 ;;org-mode upgrade
 
 (setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "FEEDBACK" "|" "DONE" "CANCELED")))
 (setq org-src-fontify-natively 't)
+
+
