@@ -27,7 +27,7 @@
 
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins")
 
-
+(require 'git)
 (require 'linum+)
 (setq linum-format "%d")
 (global-linum-mode 1)
