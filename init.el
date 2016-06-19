@@ -62,7 +62,8 @@
 
 
 ;;org-mode upgrade
-
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
 (setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "FEEDBACK" "|" "DONE" "CANCELED")))
 (setq org-src-fontify-natively 't)
 
