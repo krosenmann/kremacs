@@ -4,26 +4,7 @@
 (setq org-src-fontify-natively t)
 
 (tool-bar-mode -1)
-(setq make-backup-files nil)
-(setq auto-save-list-file-name nil)
 (setq auto-save-default nil)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-enabled-themes (quote (deeper-blue))))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#181a26" :foreground "gray80" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 128 :width normal :foundry "unknown" :family "Ubuntu Mono")))))
 
 (add-to-list 'load-path "/home/roman/Kr_emacs/plugins")
 
@@ -67,4 +48,17 @@
 (setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "FEEDBACK" "|" "DONE" "CANCELED")))
 (setq org-src-fontify-natively 't)
 
-
+(eval-when-compile (require 'starters "/home/roman/Kr_emacs/plugins/starters.el"))
+(require 'ox-cv)
+(add-to-list 'org-latex-classes
+             '("mymoderncv"
+               "\\documentclass\{moderncv\}
+\[NO-DEFAULT-PACKAGES\]
+\[NO-PACKAGES\]
+\[EXTRA\]"
+	       ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))) 
+(add-to-list 'org-export-before-parsing-hook 'ox-cv-export-parse-employment)
+(setq org-icalendar-use-deadline '(todo-due event-if-todo))
+(setq org-icalendar-use-scheduled '(event-if-todo))
