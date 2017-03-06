@@ -6,7 +6,7 @@
 (tool-bar-mode -1)
 (setq auto-save-default nil)
 
-(add-to-list 'load-path "/home/roman/Kr_emacs/plugins")
+(add-to-list 'load-path "/home/zrr/kremacs/plugins")
 
 (require 'git)
 (require 'linum+)
@@ -35,10 +35,10 @@
 
 ;;webkit
 ;; Don't need anymore
-;;(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/webkit")
-(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-epc")
-(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-deferred")
-(add-to-list 'load-path "/home/roman/Kr_emacs/plugins/emacs-ctable")
+;;(add-to-list 'load-path "/home/zrr/kremacs/plugins/webkit")
+(add-to-list 'load-path "/home/zrr/kremacs/plugins/emacs-epc")
+(add-to-list 'load-path "/home/zrr/kremacs/plugins/emacs-deferred")
+(add-to-list 'load-path "/home/zrr/kremacs/plugins/emacs-ctable")
 ;;(require 'webkit)
 
 
@@ -48,17 +48,17 @@
 (setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "FEEDBACK" "|" "DONE" "CANCELED")))
 (setq org-src-fontify-natively 't)
 
-(eval-when-compile (require 'starters "/home/roman/Kr_emacs/plugins/starters.el"))
-(require 'ox-cv)
-(add-to-list 'org-latex-classes
-             '("mymoderncv"
-               "\\documentclass\{moderncv\}
-\[NO-DEFAULT-PACKAGES\]
-\[NO-PACKAGES\]
-\[EXTRA\]"
-	       ("\\section{%s}" . "\\section*{%s}")
-             ("\\subsection{%s}" . "\\subsection*{%s}")
-             ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))) 
-(add-to-list 'org-export-before-parsing-hook 'ox-cv-export-parse-employment)
+;(eval-when-compile (require 'starters "/home/zrr/kremacs/plugins/starters.el"))
+;(require 'ox-cv)
+;(add-to-list 'org-latex-classes
+;             '("mymoderncv"
+;               "\\documentclass\{moderncv\}
+;\[NO-DEFAULT-PACKAGES\]
+;\[NO-PACKAGES\]
+;\[EXTRA\]"
+;	       ("\\section{%s}" . "\\section*{%s}")
+;             ("\\subsection{%s}" . "\\subsection*{%s}")
+;             ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))) 
+;(add-to-list 'org-export-before-parsing-hook 'ox-cv-export-parse-employment)
 (setq org-icalendar-use-deadline '(todo-due event-if-todo))
 (setq org-icalendar-use-scheduled '(event-if-todo))
