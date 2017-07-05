@@ -50,7 +50,7 @@
 ;;org-mode upgrade
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-(setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "FEEDBACK" "|" "DONE" "CANCELED")))
+(setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "IN_PROCESS" "FEEDBACK" "|" "DONE" "CANCELED")))
 (setq org-src-fontify-natively 't)
 
 ;; (eval-when-compile (require 'starters "~/Kr_emacs/plugins/starters.el"))
