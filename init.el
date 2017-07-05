@@ -7,9 +7,9 @@
 (tool-bar-mode -1)
 (setq auto-save-default nil)
 
-(add-to-list 'load-path "~/Kr_emacs/plugins/")
-(add-to-list 'load-path "~/Kr_emacs/plugins/company/")
-(add-to-list 'load-path "~/Kr_emacs/plugins/anaconda-mode/")
+(add-to-list 'load-path "~/kremacs/plugins/")
+(add-to-list 'load-path "~/kremacs/plugins/company/")
+(add-to-list 'load-path "~/kremacs/plugins/anaconda-mode/")
 
 
 (require 'git)
@@ -40,10 +40,10 @@
 
 ;;webkit
 ;; Don't need anymore
-;;(add-to-list 'load-path "~/Kr_emacs/plugins/webkit")
-;;(add-to-list 'load-path "~/Kr_emacs/plugins/emacs-epc")
-;;(add-to-list 'load-path "~/Kr_emacs/plugins/emacs-deferred")
-;;(add-to-list 'load-path "~/Kr_emacs/plugins/emacs-ctable")
+;;(add-to-list 'load-path "~/kremacs/plugins/webkit")
+;;(add-to-list 'load-path "~/kremacs/plugins/emacs-epc")
+;;(add-to-list 'load-path "~/kremacs/plugins/emacs-deferred")
+;;(add-to-list 'load-path "~/kremacs/plugins/emacs-ctable")
 ;;(require 'webkit)
 
 
@@ -53,7 +53,7 @@
 (setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "FEEDBACK" "|" "DONE" "CANCELED")))
 (setq org-src-fontify-natively 't)
 
-;; (eval-when-compile (require 'starters "~/Kr_emacs/plugins/starters.el"))
+;; (eval-when-compile (require 'starters "~/kremacs/plugins/starters.el"))
 (require 'ox-cv)
 (add-to-list 'org-latex-classes
              '("mymoderncv"
@@ -79,19 +79,15 @@
 (setq org-startup-with-inline-images 1)
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((python . t)))
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)))
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((plantuml . t)))
-;; 
-;; ditaa
-;;
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((ditaa . t)))
+ '((python . t)
+   (sh . t)
+   (ditaa . t)
+   (plantuml . t)
+   (lilypond . t)
+   (scheme . t)
+   (latex . t)
+   (php . t)
+   ))
 (setq org-ditaa-jar-path "/usr/bin/ditaa")
 (require 'open-djvu-external)
 (require 'start-new-org)
