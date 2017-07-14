@@ -92,3 +92,4 @@
 (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 (require 'open-djvu-external)
 (require 'start-new-org)
+
