@@ -54,20 +54,20 @@
 (setq org-src-fontify-natively 't)
 
 ;; (eval-when-compile (require 'starters "~/kremacs/plugins/starters.el"))
-(require 'ox-cv)
-(add-to-list 'org-latex-classes
-             '("mymoderncv"
-               "\\documentclass\{moderncv\}
-\[NO-DEFAULT-PACKAGES\]
-\[NO-PACKAGES\]
-\[EXTRA\]"
-	       ("\\section{%s}" . "\\section*{%s}")
-             ("\\subsection{%s}" . "\\subsection*{%s}")
-             ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))) 
-(add-to-list 'org-export-before-parsing-hook 'ox-cv-export-parse-employment)
+;; (require 'ox-cv)
+;; (add-to-list 'org-latex-classes
+;;              '("mymoderncv"
+;;                "\\documentclass\{moderncv\}
+;; \[NO-DEFAULT-PACKAGES\]
+;; \[NO-PACKAGES\]
+;; \[EXTRA\]"
+;; 	       ("\\section{%s}" . "\\section*{%s}")
+;;              ("\\subsection{%s}" . "\\subsection*{%s}")
+;;              ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))) 
+;(add-to-list 'org-export-before-parsing-hook 'ox-cv-export-parse-employment)
 (setq org-icalendar-use-deadline '(todo-due event-if-todo))
 (setq org-icalendar-use-scheduled '(event-if-todo))
-;(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
 ;(add-hook 'python-mode-hook 'anaconda-mode)
 ;(eval-after-load 'company
 ;  '(push 'company-anaconda company-backends))
@@ -81,13 +81,14 @@
  'org-babel-load-languages
  '((python . t)
    (sh . t)
-   (ditaa . t)
    (plantuml . t)
-   (lilypond . t)
-   (scheme . t)
-   (latex . t)
-   (php . t)
+   (ditaa . t)
+   (lilypond  t)
    ))
+(add-to-list
+ 'org-src-lang-modes '("plantuml" . plantuml))
+
 (setq org-ditaa-jar-path "/usr/bin/ditaa")
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 (require 'open-djvu-external)
 (require 'start-new-org)

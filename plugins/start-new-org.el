@@ -11,5 +11,9 @@
     "#+TITLE: " (read-string "Title: " "") "\n"
     "#+AUTHOR: " (read-string "Author: " "Roman Zayrullin") "\n"
     "#+EMAIL: " (read-string "email: " "krosenmann@gmail.com") "\n"
-    "#+STARTUP: showall\n")))
+    "#+STARTUP: showall\n"
+    "#+LaTeX_ClASS_OPTIONS: " (read-string "fz, paper, font" "[11pt,a4paper,ubuntu]") "\n"
+    "#+LaTeX_HEADER:\\usepackage[scale=0.75]{geometry}\n"
+    "#+LaTeX_HEADER:\\usepackage[utf-8]{inputrec}\n"
+    )))
 (provide 'start-new-org)
