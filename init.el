@@ -1,7 +1,9 @@
 ;;Theme and etc.
+(prefer-coding-system 'utf-8)
 (setq show-paren-style 'expression)
 (show-paren-mode 2)
 (setq org-src-fontify-natively t)
+(global-set-key (kbd "S-<f3>") 'other-window)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -93,3 +95,5 @@
 (require 'open-djvu-external)
 (require 'start-new-org)
 
+(load-file "~/kremacs/init-python.el")
+(load-file "~/kremacs/init-lisp.el")

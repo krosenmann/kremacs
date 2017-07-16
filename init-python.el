@@ -3,4 +3,4 @@
 (eval-after-load 'company
   '(push 'company-anaconda company-backends))
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-(provide 'init-python)
+
