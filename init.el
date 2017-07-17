@@ -97,3 +97,5 @@
 
 (load-file "~/kremacs/init-python.el")
 (load-file "~/kremacs/init-lisp.el")
+(global-company-mode 1)
+ 
