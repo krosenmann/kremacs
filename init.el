@@ -82,7 +82,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
-   (sh . t)
+   ;; (sh . t)
    (plantuml . t)
    (ditaa . t)
    (lilypond  t)
@@ -99,3 +99,4 @@
 (load-file "~/kremacs/init-lisp.el")
 (global-company-mode 1)
  
+(setq-default indent-tabs-mode nil)
