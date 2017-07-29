@@ -29,3 +29,21 @@
                   "self")
                  symbol-end))
      ))
+
+(defun python-bp()
+  ;; Paste a ipdb breakpoint
+  (interactive)
+  (insert "from IPython.core.debugger import Tracer; Tracer()()")
+ )
+
+(defun clear-bp()
+  ;; Clear bp's in a buffer
+  (interactive)
+  (kill-line)
+ )
+
+(defun python-extend-keymap ()
+  "Extended keymaps for python-mode"
+  (local-set-key (kbd "<f6>") 'python-bp))
+
+(add-hook 'python-mode-hook 'python-extend-keymap)
