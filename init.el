@@ -10,8 +10,8 @@
 (setq auto-save-default nil)
 
 (add-to-list 'load-path "~/kremacs/plugins/")
-(add-to-list 'load-path "~/kremacs/plugins/company/")
-(add-to-list 'load-path "~/kremacs/plugins/anaconda-mode/")
+;; (add-to-list 'load-path "~/kremacs/plugins/company/")
+;; (add-to-list 'load-path "~/kremacs/plugins/anaconda-mode/")
 
 
 (require 'git)
@@ -100,3 +100,8 @@
 (global-company-mode 1)
  
 (setq-default indent-tabs-mode nil)
+
+;; Big questions. Need make some pull requests, I think
+;; Games :)
+(require '2048-game)
+
