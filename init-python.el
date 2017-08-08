@@ -47,3 +47,5 @@
   (local-set-key (kbd "<f6>") 'python-bp))
 
 (add-hook 'python-mode-hook 'python-extend-keymap)
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i")
