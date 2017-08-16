@@ -4,6 +4,9 @@
 (show-paren-mode 2)
 (setq org-src-fontify-natively t)
 (global-set-key (kbd "S-<f3>") 'other-window)
+;; for nw version
+(global-set-key (kbd "<f15>") 'other-window)
+
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
