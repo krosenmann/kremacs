@@ -22,3 +22,7 @@
   company-quickhelp company-irony company-c-headers company-anaconda
   auto-org-md all-the-icons-dired
 
+* dependencys
+#+BEGIN_SRC sh
+sudo apt install cppcheck ditaa plantuml
+#+END_SRC
