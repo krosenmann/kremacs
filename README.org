@@ -1,0 +1,24 @@
+* Using
+  In .emacs:
+#+BEGIN_SRC elisp
+  (add-hook 'after-init-hook (lambda() (load-file "~/kremacs/init.el")))
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+
+  (add-hook 'after-init-hook (lambda () (require 'yasnippet)
+                               (yas-global-mode 1)
+                               ))
+
+#+END_SRC
+
+* package-list
+  2048-game pandoc pandoc-mode geiser quack pydoc-info sx
+  flymake-python-pyflakes company-jedi company-shell importmagic
+  pytest yasnippet web-mode seq pyvenv python-info pyenv-mode-auto
+  pydoc py-autopep8 plantuml-mode pdf-tools paperless package-lint
+  markdown-mode+ jedi-direx ecb django-mode django-manage
+  company-quickhelp company-irony company-c-headers company-anaconda
+  auto-org-md all-the-icons-dired
+
