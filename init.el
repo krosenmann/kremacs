@@ -7,6 +7,7 @@
 ;; for nw version
 (global-set-key (kbd "<f15>") 'other-window)
 
+(set-face-attribute 'default nil :height 125)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -15,6 +16,7 @@
 (add-to-list 'load-path "~/kremacs/plugins/")
 ;; (add-to-list 'load-path "~/kremacs/plugins/company/")
 ;; (add-to-list 'load-path "~/kremacs/plugins/anaconda-mode/")
+
 
 
 (require 'git)

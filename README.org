@@ -14,6 +14,7 @@
 #+END_SRC
 
 * package-list
+#+BEGIN_SRC 
   2048-game pandoc pandoc-mode geiser quack pydoc-info sx
   flymake-python-pyflakes company-jedi company-shell importmagic
   pytest yasnippet web-mode seq pyvenv python-info pyenv-mode-auto
@@ -21,6 +22,7 @@
   markdown-mode+ jedi-direx ecb django-mode django-manage
   company-quickhelp company-irony company-c-headers company-anaconda
   auto-org-md all-the-icons-dired
+#+END_SRC
 
 * dependencys
 #+BEGIN_SRC sh

@@ -49,3 +49,4 @@
 (add-hook 'python-mode-hook 'python-extend-keymap)
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i")
+(setq python-check-command "flake8")
