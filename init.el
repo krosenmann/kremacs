@@ -7,7 +7,7 @@
 ;; for nw version
 (global-set-key (kbd "<f15>") 'other-window)
 
-(set-face-attribute 'default nil :height 125)
+;; (set-face-attribute 'default nil :height 125)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -16,8 +16,6 @@
 (add-to-list 'load-path "~/kremacs/plugins/")
 ;; (add-to-list 'load-path "~/kremacs/plugins/company/")
 ;; (add-to-list 'load-path "~/kremacs/plugins/anaconda-mode/")
-
-
 
 (require 'git)
 (require 'linum+)
@@ -75,14 +73,15 @@
 (setq org-icalendar-use-deadline '(todo-due event-if-todo))
 (setq org-icalendar-use-scheduled '(event-if-todo))
 ;; (add-hook 'after-init-hook 'global-company-mode)
-;(add-hook 'python-mode-hook 'anaconda-mode)
-;(eval-after-load 'company
-;  '(push 'company-anaconda company-backends))
-;(add-to-list 'company-backends '(company-anaconda company-files))
-;(add-hook 'python-mode-hook 'my/python-mode-hook)
-					;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-;; (require 'package)
-;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (eval-after-load 'company
+;;  '(push 'company-anaconda company-backends))
+;; (add-to-list 'company-backends '(company-anaconda company-files))
+;; (add-hook 'python-mode-hook 'my/python-mode-hook)
+;; 					(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (setq org-startup-with-inline-images 1)
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -100,6 +99,7 @@
 (require 'open-djvu-external)
 (require 'start-new-org)
 
+(load-file "~/kremacs/init-ccpp.el")
 (load-file "~/kremacs/init-python.el")
 (load-file "~/kremacs/init-lisp.el")
 (global-company-mode 1)
