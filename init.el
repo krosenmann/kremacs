@@ -89,6 +89,7 @@
    ;; (sh . t)
    (plantuml . t)
    (ditaa . t)
+   (emacs-lisp . t)
    (lilypond  t)
    ))
 (add-to-list
@@ -99,14 +100,16 @@
 (require 'open-djvu-external)
 (require 'start-new-org)
 
-(load-file "~/kremacs/init-ccpp.el")
+;; (load-file "~/kremacs/init-ccpp.el")
 (load-file "~/kremacs/init-python.el")
 (load-file "~/kremacs/init-lisp.el")
 (global-company-mode 1)
  
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil) 
 
 ;; Big questions. Need make some pull requests, I think
 ;; Games :)
 (require '2048-game)
 
+(require 'yasnippet)
+(yas-global-mode 't)

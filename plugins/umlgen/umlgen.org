@@ -1,0 +1,39 @@
+#+TITLE: UMLGenerator
+#+AUTHOR: Roman Zayrullin
+#+EMAIL: krosenmann@gmail.com
+#+STARTUP: showall
+#+LaTeX_ClASS_OPTIONS: [11pt,a4paper,ubuntu]
+#+LaTeX_HEADER:\usepackage[scale=0.75]{geometry}
+#+LaTeX_HEADER:\usepackage[utf-8]{inputrec}
+
+* Постановка задачи
+  Проходить по файлу и генерировать на основе кода диаграммы с помощью
+  plantuml. Показывая места разрешения в диалоговом режиме. ПРи этом
+  отображать в буфере текущий код.
+
+* Решение
+
+** Построение диаграммы классов
+   Реализовать функцию прохода по буферу. По ключевому слову class
+   переход в буфер plantuml и печать туда класса
+
+   #+begin_src emacs-lisp :tangle yes
+     (defun python-umlgenerator(buf-name)
+       (interactive "Buffer: ")
+       (beginning-of-buffer)
+       (while (< (line-number-at-pos) (line-number-at-pos(point-max)))
+         (if (eq (current-word) "class")
+             (progn
+               (forward-word)
+               (let ((word (current-word))))
+               (message word)
+               )
+           )
+         (next-line)
+         ))
+   #+end_src
+ 
+*** Трансляция дерева в plantuml
+    #+begin_src emacs-lisp :tangle yes
+    
+    #+end_src
