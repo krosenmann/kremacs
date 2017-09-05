@@ -9,31 +9,57 @@
 * Постановка задачи
   Проходить по файлу и генерировать на основе кода диаграммы с помощью
   plantuml. Показывая места разрешения в диалоговом режиме. ПРи этом
-  отображать в буфере текущий код.
+  отображать в буфере текущий код. 
 
 * Решение
 
 ** Построение диаграммы классов
    Реализовать функцию прохода по буферу. По ключевому слову class
-   переход в буфер plantuml и печать туда класса
+   получать имя класса Python. 
+   # Проверять наличие полей ForeignKey и создавать от них связи.
 
    #+begin_src emacs-lisp :tangle yes
-     (defun python-umlgenerator(buf-name)
-       (interactive "Buffer: ")
+     (defun python-umlgenerator()
+       (interactive)
        (beginning-of-buffer)
+       (plant-buffer-prepare)
        (while (< (line-number-at-pos) (line-number-at-pos(point-max)))
-         (if (eq (current-word) "class")
+         (if (equal (current-word) "class")
              (progn
                (forward-word)
-               (let ((word (current-word))))
-               (message word)
-               )
-           )
+               (forward-char 2)
+               (setq word (current-word))
+               (if (string= word "Meta")
+                   ()
+                   (plant-translator word))
+               ))
          (next-line)
+         (beginning-of-line)
          ))
    #+end_src
+
+   #+RESULTS:
+   : python-umlgenerator
  
-*** Трансляция дерева в plantuml
-    #+begin_src emacs-lisp :tangle yes
-    
-    #+end_src
+   По полученному имени класса создавать аналогичный класс plantuml и
+   помещать его в созданный временный буфер в plantuml-mode
+
+   #+begin_src emacs-lisp :tangle yes  
+     (defun plant-buffer-prepare()
+       (setq cur-buf (buffer-name))
+       (switch-to-buffer "PlantUml"
+        ;; (format "*PlantUml %s*" cur-buf)
+                         )
+       (plantuml-mode)
+       (switch-to-buffer cur-buf)
+       )
+
+     (defun plant-translator (word)
+       (with-current-buffer "PlantUml"
+         (insert
+          (concat "class " word "\n"))))
+     ;; (plant-translator "Todo")
+   #+end_src
+
+   #+RESULTS:
+   : plant-translator
