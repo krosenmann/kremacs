@@ -16,7 +16,8 @@
 ** Построение диаграммы классов
    Реализовать функцию прохода по буферу. По ключевому слову class
    получать имя класса Python. 
-   # Проверять наличие полей ForeignKey и создавать от них связи.
+   # Проверять наличие полей ForeignKey и создавать от них
+   # связи. Связи именовать по значению related_name
 
    #+begin_src emacs-lisp :tangle yes
      (defun python-umlgenerator()
@@ -31,15 +32,35 @@
                (setq word (current-word))
                (if (string= word "Meta")
                    ()
-                   (plant-translator word))
-               ))
+                 (progn 
+                   (plant-translator word)
+                   (find-connect word))
+               )))
          (next-line)
          (beginning-of-line)
          ))
+
+     (defun find-connect(clsname)
+       (while (not (member
+                    (current-word) '("def" "class" "async")))
+         (setq cur-str (thing-at-point 'line t))
+         (when (string-match "[ForeignKey]" cur-str)
+           (progn
+             (beginning-of-line)
+             (setq varname (current-word))
+             (search-forward "Foreignkey")
+             (forward-word)
+             (forward-char 2)
+             (setq type-class (current-word))
+             (with-current-buffer "PlantUml"
+               (insert "{\n" "+" varname ": " type-class "\n")))
+           ))
+       (with-current-buffer "PlantUml"
+       )
    #+end_src
 
    #+RESULTS:
-   : python-umlgenerator
+   : find-connect
  
    По полученному имени класса создавать аналогичный класс plantuml и
    помещать его в созданный временный буфер в plantuml-mode
