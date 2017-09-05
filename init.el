@@ -37,11 +37,11 @@
 
 ;;Auto-complete
 
-;(require 'auto-complete)
-;(global-auto-complete-mode t)
-;(require 'auto-complete-config)
-;(ac-config-default)
-;(eval-after-load "LilyPond-mode" (load-library "ac-lilypond"))
+;; (require 'auto-complete)
+;; (global-auto-complete-mode t)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;; (eval-after-load "LilyPond-mode" (load-library "ac-lilypond"))
 
 ;;webkit
 ;; Don't need anymore
