@@ -97,6 +97,7 @@
 
 (setq org-ditaa-jar-path "/usr/bin/ditaa")
 (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+(setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 (require 'open-djvu-external)
 (require 'start-new-org)
 
