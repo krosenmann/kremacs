@@ -7,7 +7,7 @@
 ;; for nw version
 (global-set-key (kbd "<f15>") 'other-window)
 
-;; (set-face-attribute 'default nil :height 125)
+(set-face-attribute 'default nil :height 107)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -114,3 +114,8 @@
 
 (require 'yasnippet)
 (yas-global-mode 't)
+(global-ede-mode 1)
+(require 'semantic/sb)
+(semantic-mode 1)
+(require 'semantic/ia)
+

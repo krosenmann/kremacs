@@ -50,3 +50,7 @@
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i")
 (setq python-check-command "flake8")
+
+
+
+            
