@@ -24,7 +24,7 @@
   auto-org-md all-the-icons-dired
 #+END_SRC
 
-* dependencys
+* dependencies
 #+BEGIN_SRC sh
 sudo apt install cppcheck ditaa plantuml
 #+END_SRC
