@@ -123,3 +123,34 @@
 ** TODO Проход по папкам и создание областей видимости.
 
 ** TODO Связи для унаследованных полей
+
+** TODO Определять вот этих петучей
+   #+begin_src python :tangle no
+     query = """
+             select %(select)s
+             from {} as p
+             right join {} as q on (p.code = q.product_id)
+             left join {} as b on (b.product_id = q.product_id)
+             %(where)s
+             %(group_by)s
+             %(order_by)s
+             %(limit)s
+         """.format(
+             Product._meta.db_table,
+             Quantity._meta.db_table,
+             TemporaryQuantityBan._meta.db_table,
+         )
+
+         def get_objects_count(self):
+             from django.db import connections
+             cursor = connections['production'].cursor()
+             cursor.execute(self.query % {
+                 'select': 'count(q.id) as cnt',
+                 'where': self.get_where(),
+                 'group_by': '',
+                 'order_by': '',
+                 'limit': '',
+             }, [])
+             return cursor.fetchone()[0]
+   #+end_src
+
