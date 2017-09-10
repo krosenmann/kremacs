@@ -52,7 +52,7 @@
         (with-current-buffer "PlantUml"
           (insert "+" varname ": " "\n")
           (save-excursion  (end-of-buffer)
-                           (insert clsname " -- " type-class": " varname "\n")))
+                           (insert type-class " -- " clsname": " varname "\n")))
           ))
     (next-line)
     (beginning-of-line))
