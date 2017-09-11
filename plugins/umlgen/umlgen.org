@@ -16,6 +16,10 @@
 ** Построение диаграммы классов
    Проходить по буферу. По ключевому слову class
    получать имя класса Python.
+   #+begin_src emacs-lisp :tangle yes
+     (setq classes-list '((nil . nil)))
+   #+end_src
+
    Проверять наличие полей ForeignKey и создавать от них
    связи. Связи именовать по related_name. При этом учиывается и
    наследование, т.е. если в некоем классе Client имеется ForeignKey
@@ -27,8 +31,14 @@
        ((name :initarg :name)
         (parent :initarg :parent)
         (foreign-key :initarg :foreign-key)
+        (fields :initarg :fileds)
         (methods :initarg :methods)
         ))
+
+     ;; (defmethod remember-me ((obj related-class))
+     ;;   (setq name (oref obj name))
+     ;;   (setq buu (name . obj))
+     ;;   (add-to-list 'classes-list 'buu))
 
      (defmethod translate-to-plant ((obj related-class))
        (setq class-plantdia (concat "class " (oref obj name)"{\n"))
@@ -38,21 +48,31 @@
        class-plantdia)
 
      (defmethod make-inherit-diagramm ((obj related-class))
-       (concat (oref obj parent) " <|-- " (oref obj name))
-       )
+       (concat (oref obj parent) " <|-- " (oref obj name)))
 
      (defmethod attrib-diagramm ((obj related-class))
-       )
+       (setq val nil)
+       (dolist (elem (oref obj foreign-key))
+         (setq val (concat val "\n" (car elem) " -- " (oref obj name) ": " (cdr elem) "\n")))
+       val)
 
      (defun python-umlclass-generator()
        (interactive)
        (beginning-of-buffer)
        (plant-buffer-prepare)
        (while (< (line-number-at-pos) (line-number-at-pos(point-max)))
+         ;; (cound ((current-word "class")
+         ;;         (forward-to-word 1)
+         ;;         (setq cur-c (make-instance 'related-class :name current-word))
+         ;;         (to-definition))
+         ;;         )
+         ;;        ())
+
+    
          (if (equal (current-word) "class")
              (progn
                (forward-to-word 1)
-               (setq word (current-word))
+               (setq cur-c (make-instance 'related-class :name current-word))
                (if (string= word "Meta")
                    nil
                  (progn 
