@@ -37,8 +37,12 @@
        (setq class-plantdia (concat class-plantdia "}\n"))
        class-plantdia)
 
-     ;; (defmethod make-inherit-diagramm ((obj related-class)) 
+     (defmethod make-inherit-diagramm ((obj related-class))
+       (concat (oref obj parent) " <|-- " (oref obj name))
+       )
 
+     (defmethod attrib-diagramm ((obj related-class))
+       )
 
      (defun python-umlclass-generator()
        (interactive)
