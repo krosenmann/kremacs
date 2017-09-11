@@ -16,10 +16,6 @@
 ** Построение диаграммы классов
    Проходить по буферу. По ключевому слову class
    получать имя класса Python.
-   #+begin_src emacs-lisp :tangle yes
-     (setq classes-list '((nil . nil)))
-   #+end_src
-
    Проверять наличие полей ForeignKey и создавать от них
    связи. Связи именовать по related_name. При этом учиывается и
    наследование, т.е. если в некоем классе Client имеется ForeignKey
@@ -56,19 +52,16 @@
          (setq val (concat val "\n" (car elem) " -- " (oref obj name) ": " (cdr elem) "\n")))
        val)
 
-     (defun python-umlclass-generator()
-       (interactive)
+     (defun readline()
+       (buffer-substring-no-properties
+        (line-beginning-position)
+        (line-end-position)))
+
+     (defun tree-generator()
        (beginning-of-buffer)
        (plant-buffer-prepare)
        (while (< (line-number-at-pos) (line-number-at-pos(point-max)))
-         ;; (cound ((current-word "class")
-         ;;         (forward-to-word 1)
-         ;;         (setq cur-c (make-instance 'related-class :name current-word))
-         ;;         (to-definition))
-         ;;         )
-         ;;        ())
-
-    
+         (setq curline (readline))
          (if (equal (current-word) "class")
              (progn
                (forward-to-word 1)
@@ -129,6 +122,15 @@
 
    #+RESULTS:
    : find-connect
+
+   Комментарии выдеяются в отедельные note.
+   #+begin_src emacs-lisp :tangle yes
+     (defun comment-to-note(str)
+       (if (string-match-p (regexp-quote "#") str)
+           (progn (setq note-on (split-string "#")))
+         (setq note-on nil))
+         note-on)
+   #+end_src
  
    По полученному имени класса создавать аналогичный класс plantuml и
    помещать его в созданный временный буфер в plantuml-mode
