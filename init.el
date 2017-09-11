@@ -14,8 +14,6 @@
 (setq auto-save-default nil)
 
 (add-to-list 'load-path "~/kremacs/plugins/")
-;; (add-to-list 'load-path "~/kremacs/plugins/company/")
-;; (add-to-list 'load-path "~/kremacs/plugins/anaconda-mode/")
 
 (require 'git)
 (require 'linum+)
@@ -34,6 +32,7 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(package-initialize)
 (load-file "~/kremacs/init-org.el")
 (load-file "~/kremacs/init-ccpp.el")
 (load-file "~/kremacs/init-python.el")
