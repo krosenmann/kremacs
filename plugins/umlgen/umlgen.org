@@ -15,11 +15,31 @@
 
 ** Построение диаграммы классов
    Проходить по буферу. По ключевому слову class
-   получать имя класса Python. 
+   получать имя класса Python.
    Проверять наличие полей ForeignKey и создавать от них
-   связи. Связи именовать по имени ссылающейся переменной.
+   связи. Связи именовать по related_name. При этом учиывается и
+   наследование, т.е. если в некоем классе Client имеется ForeignKey
+   на self, то у дочернего класса ChildClient появляется ForeignKey на
+   родителя. Причем, на того, на которого указан self.
 
    #+begin_src emacs-lisp :tangle yes
+     (defclass related-class ()
+       ((name :initarg :name)
+        (parent :initarg :parent)
+        (foreign-key :initarg :foreign-key)
+        (methods :initarg :methods)
+        ))
+
+     (defmethod translate-to-plant ((obj related-class))
+       (setq class-plantdia (concat "class " (oref obj name)"{\n"))
+       (dolist (elem (oref obj methods))
+         (setq class-plantdia (concat class-plantdia elem "()\n")))
+       (setq class-plantdia (concat class-plantdia "}\n"))
+       class-plantdia)
+
+     ;; (defmethod make-inherit-diagramm ((obj related-class)) 
+
+
      (defun python-umlclass-generator()
        (interactive)
        (beginning-of-buffer)
