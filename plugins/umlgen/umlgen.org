@@ -11,6 +11,8 @@
   plantuml. Показывая места разрешения в диалоговом режиме. ПРи этом
   отображать в буфере текущий код. 
 
+** TODO Переписать с использованием bovinate
+
 * Решение
 
 ** Построение диаграммы классов
@@ -44,11 +46,21 @@
          (setq val (concat val "\n" (car elem) " -- " (oref obj name) ": " (cdr elem) "\n")))
        val)
    #+end_src
+   
+   При этом комментарии и докстринги выделяются на лист в виде заметок
+   #+begin_src emacs-lisp :tangle yes
+     (defun split-by-comment(str)
+       (if (string-match-p (regexp-quote "#") str)
+           (setq note-on (split-string "#"))
+         (setq note-on str))
+       note-on)
+   #+end_src
 
-   Достаточно лишь отслеживать нахождение в текущем
-   неймспейсе(модуле). При построчном чтении для этого достаточно
-   отслеживать отступы у каждого ключевого слова, задающего
-   пространства имен. 
+   Каждый найденный класс разбирается по методам и атрибутам
+   #+begin_src emacs-lisp :tangle yes
+
+   #+end_src
+
 
    #+begin_src emacs-lisp :tangle yes
      (defun readline()
@@ -56,12 +68,24 @@
         (line-beginning-position)
         (line-end-position)))
 
+
+     (end-of-defun)
+     (set-mark)
+     (kill-ring-save)
+
+     (defun read-current-namespace()
+       (get-attributes)
+       (get-methods)
+       (let (cl)
+         (setq cl (split-by-comment (readline)))
+         cl))
+
      (defun tree-generator()
        (beginning-of-buffer)
        (plant-buffer-prepare)
        (while (< (line-number-at-pos) (line-number-at-pos(point-max)))
          (setq curline (readline))
-         (setq curline (split-string curline (readline))
+         (setq curline (split-string curline (readline)))
          (if (equal (car curline) "class")
              (progn
                (setq cur-c (make-instance 'related-class :name ()))
@@ -69,10 +93,10 @@
                    nil
                  (progn 
                    (plant-translator word)
-                   (find-connect word))
-               )))
+                   (find-connect word)))
+               (read-current-namespace)
+               ))
          (next-line)
-         (beginning-of-line)
          ))
 
      (defun find-connect(clsname)
@@ -124,11 +148,6 @@
 
    Комментарии выдеяются в отедельные note.
    #+begin_src emacs-lisp :tangle yes
-     (defun comment-to-note(str)
-       (if (string-match-p (regexp-quote "#") str)
-           (progn (setq note-on (split-string "#")))
-         (setq note-on nil))
-         note-on)
    #+end_src
  
    По полученному имени класса создавать аналогичный класс plantuml и
