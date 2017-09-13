@@ -14,13 +14,10 @@
 * Решение
 
 ** Построение диаграммы классов
-   Проходить по буферу. По ключевому слову class
-   получать имя класса Python.
-   Проверять наличие полей ForeignKey и создавать от них
-   связи. Связи именовать по related_name. При этом учиывается и
-   наследование, т.е. если в некоем классе Client имеется ForeignKey
-   на self, то у дочернего класса ChildClient появляется ForeignKey на
-   родителя. Причем, на того, на которого указан self.
+   Если смотреть на объявление классов в Питоне, то, на самом деле,
+   его синтаксическое дерево является достаточно простым. По-крайней
+   мере, если говорить о построении диаграммы классов на основе
+   имеющегося кода. 
 
    #+begin_src emacs-lisp :tangle yes
      (defclass related-class ()
@@ -30,11 +27,6 @@
         (fields :initarg :fileds)
         (methods :initarg :methods)
         ))
-
-     ;; (defmethod remember-me ((obj related-class))
-     ;;   (setq name (oref obj name))
-     ;;   (setq buu (name . obj))
-     ;;   (add-to-list 'classes-list 'buu))
 
      (defmethod translate-to-plant ((obj related-class))
        (setq class-plantdia (concat "class " (oref obj name)"{\n"))
@@ -51,7 +43,14 @@
        (dolist (elem (oref obj foreign-key))
          (setq val (concat val "\n" (car elem) " -- " (oref obj name) ": " (cdr elem) "\n")))
        val)
+   #+end_src
 
+   Достаточно лишь отслеживать нахождение в текущем
+   неймспейсе(модуле). При построчном чтении для этого достаточно
+   отслеживать отступы у каждого ключевого слова, задающего
+   пространства имен. 
+
+   #+begin_src emacs-lisp :tangle yes
      (defun readline()
        (buffer-substring-no-properties
         (line-beginning-position)
@@ -62,10 +61,10 @@
        (plant-buffer-prepare)
        (while (< (line-number-at-pos) (line-number-at-pos(point-max)))
          (setq curline (readline))
-         (if (equal (current-word) "class")
+         (setq curline (split-string curline (readline))
+         (if (equal (car curline) "class")
              (progn
-               (forward-to-word 1)
-               (setq cur-c (make-instance 'related-class :name current-word))
+               (setq cur-c (make-instance 'related-class :name ()))
                (if (string= word "Meta")
                    nil
                  (progn 
