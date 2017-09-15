@@ -54,3 +54,5 @@
 
 
             
+;; Django
+(require 'pony-mode)

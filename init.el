@@ -50,3 +50,4 @@
 (semantic-mode 1)
 (require 'semantic/ia)
 
+(add-to-list 'auto-mode-alist '("\\.puml\\" . plantuml-mode))

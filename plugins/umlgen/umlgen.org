@@ -17,7 +17,7 @@
 
 ** Построение диаграммы классов
    Если смотреть на объявление классов в Питоне, то, на самом деле,
-   его синтаксическое дерево является достаточно простым. По-крайней
+   его синтаксическое дерево является достаточно простым. Пто-крайней
    мере, если говорить о построении диаграммы классов на основе
    имеющегося кода. 
 
@@ -47,109 +47,22 @@
        val)
    #+end_src
    
-   При этом комментарии и докстринги выделяются на лист в виде заметок
+   С помощью статического анализатора составляем АСТ[fn:1]. Bovinate
+   из пакета CEDET разбирает как классы и переменные, так же
+   показывает связность модулей (в случае питона, заголовочных файлов
+   в случае Си и так далее)
+   
    #+begin_src emacs-lisp :tangle yes
-     (defun split-by-comment(str)
-       (if (string-match-p (regexp-quote "#") str)
-           (setq note-on (split-string "#"))
-         (setq note-on str))
-       note-on)
-   #+end_src
-
-   Каждый найденный класс разбирается по методам и атрибутам
-   #+begin_src emacs-lisp :tangle yes
-
-   #+end_src
-
-
-   #+begin_src emacs-lisp :tangle yes
-     (defun readline()
-       (buffer-substring-no-properties
-        (line-beginning-position)
-        (line-end-position)))
-
-
-     (end-of-defun)
-     (set-mark)
-     (kill-ring-save)
-
-     (defun read-current-namespace()
-       (get-attributes)
-       (get-methods)
-       (let (cl)
-         (setq cl (split-by-comment (readline)))
-         cl))
-
-     (defun tree-generator()
-       (beginning-of-buffer)
-       (plant-buffer-prepare)
-       (while (< (line-number-at-pos) (line-number-at-pos(point-max)))
-         (setq curline (readline))
-         (setq curline (split-string curline (readline)))
-         (if (equal (car curline) "class")
-             (progn
-               (setq cur-c (make-instance 'related-class :name ()))
-               (if (string= word "Meta")
-                   nil
-                 (progn 
-                   (plant-translator word)
-                   (find-connect word)))
-               (read-current-namespace)
-               ))
-         (next-line)
-         ))
-
-     (defun find-connect(clsname)
-       (while (not (member
-                    (current-word) '("def" "class" "async")))
-         (setq cur-str (thing-at-point 'line t))
-         (when (string-match "ForeignKey" cur-str)
-           (progn
-             (beginning-of-line)
-             (setq varname (current-word))
-             (forward-char (string-match "ForeignKey" cur-str))
-             (forward-to-word 1)
-             (forward-char 1)
-             (if (equal (current-word) "self")
-                 (setq type-class clsname)
-                 (setq type-class (current-word)))
-             (beginning-of-line)
-             ;; (if (string-match "related_name" cur-str)
-             ;; (progn
-             ;;   (forward-char (string-match "related_name" cur-str))
-             ;;   (forward-to-word 2)
-             ;;   (forward-char 2)
-             ;;   (setq connect-name (current-word))
-             ;;   )
-             ;; (progn
-             ;;   (end-of-line)
-             ;;   (when (equal (string (preceding-char)) ",")
-             ;;     (next-line)
-             ;;     (beginning-of-line)
-             ;;     (forward-char (string-match "related_name" cur-str))
-             ;;     (forward-to-word 2)
-             ;;     (forward-char 3)
-             ;;     (setq connect-name (current-word))))
-             ;; )
-             (with-current-buffer "PlantUml"
-               (insert "+" varname ": " "\n")
-               (save-excursion  (end-of-buffer)
-                                (insert type-class " -- " clsname": " varname "\n")))
-               ))
-         (next-line)
-         (beginning-of-line))
-       (with-current-buffer "PlantUml"
-         (insert "}\n"))
-       )
+     (defun get-synt-tree ()
+       (let ((tree))(setq tree (bovinate))
+         tree))
+    
+                      
    #+end_src
 
    #+RESULTS:
-   : find-connect
-
-   Комментарии выдеяются в отедельные note.
-   #+begin_src emacs-lisp :tangle yes
-   #+end_src
- 
+   : 1
+   
    По полученному имени класса создавать аналогичный класс plantuml и
    помещать его в созданный временный буфер в plantuml-mode
 
@@ -181,6 +94,7 @@
 ** TODO Определять енумы и ссылаться на них из модели
 
 ** TODO Диалоговый режим работы
+   Реализовать на основе Speedbar (скорее всего)
 
 ** TODO Косметика
 
@@ -217,4 +131,8 @@
              }, [])
              return cursor.fetchone()[0]
    #+end_src
+
+* Footnotes
+
+[fn:1]  Абстрактное синтаксическое дерево
 
