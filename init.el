@@ -38,6 +38,10 @@
 (load-file "~/kremacs/init-python.el")
 (load-file "~/kremacs/init-lisp.el")
 
+(require 'bookmark+)
+(bmkp-toggle-auto-light-when-jump)
+(bmkp-toggle-auto-light-when-set)
+
 (global-company-mode 1)
 (setq-default indent-tabs-mode nil) 
 
