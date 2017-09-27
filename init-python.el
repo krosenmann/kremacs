@@ -51,8 +51,10 @@
       python-shell-interpreter-args "-i")
 (setq python-check-command "flake8")
 
-
-
+(require 'auto-virtualenvwrapper)
+(add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
             
 ;; Django
 (require 'pony-mode)
