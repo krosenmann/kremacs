@@ -36,6 +36,7 @@
   (insert "from IPython.core.debugger import Tracer; Tracer()()")
  )
 
+                                        ;TODO: Довести функцию до норм очистки
 (defun clear-bp()
   ;; Clear bp's in a buffer
   (interactive)
