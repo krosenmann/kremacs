@@ -14,7 +14,8 @@
 (setq auto-save-default nil)
 
 (add-to-list 'load-path "~/kremacs/plugins/")
-(add-to-list 'load-path "~/kremacs/plugins/telega.el")
+(add-to-list 'load-path "~/kremacs/plugins/telega.el/")
+(add-to-list 'load-path "~/kremacs/plugins/elisp/")
 
 (require 'git)
 (require 'linum+)
@@ -57,3 +58,9 @@
 
 (add-to-list 'auto-mode-alist '("\\*.pu" . plantuml-mode))
 (require 'telega)
+
+;; (require 'youtrack)
+;; (setq yt-baseurl "https://youtrack.220v.ru/"
+;;       yt-password "tGLSZL"
+;;       yt-project "[MS] PollyCRM"
+;;       yt-user "zayrullin")
