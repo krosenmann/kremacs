@@ -14,6 +14,7 @@
 (setq auto-save-default nil)
 
 (add-to-list 'load-path "~/kremacs/plugins/")
+(add-to-list 'load-path "~/kremacs/plugins/telega.el")
 
 (require 'git)
 (require 'linum+)
@@ -55,3 +56,4 @@
 (require 'semantic/ia)
 
 (add-to-list 'auto-mode-alist '("\\*.pu" . plantuml-mode))
+(require 'telega)
