@@ -1,0 +1,72 @@
+#+TITLE: Ede CI Projects support
+#+AUTHOR: Roman Zayrullin
+#+EMAIL: krosenmann@gmail.com
+#+STARTUP: showall
+#+LaTeX_ClASS_OPTIONS: [11pt,a4paper,ubuntu]
+#+LaTeX_HEADER:\usepackage[scale=0.75]{geometry}
+#+LaTeX_HEADER:\usepackage[utf-8]{inputrec}
+
+* Поддержка контейнеризованных проектов в EDE
+  #+begin_src emacs-lisp :tangle yes
+    (global-ede-mode t)
+    (ede-enable-generic-projects)
+    (require 'ede/generic)
+
+    (defclass ede-ci-project (ede-generic-project)
+      ((buildfile :initform "Makefile.docker"))
+      "Docker CI Project.")
+
+    (defmethod ede-generic-setup-configuration ((proj ede-ci-project) config)
+      "Setup a configuration Make for docker"
+      (oset config build-command "make"))
+
+    (ede-generic-new-autoloader "generic-ci" "CI-docker")
+  #+end_src
+  ЕDE создает мейкфайл с
+  
+* Описание контейнера для проекта
+** Создание Dockerfile
+   Запуск компоновки Docker ~M-x dokerize-current-project~
+   В диалоговом меню задаются все необходимые параметры и значения.
+   #+begin_src emacs-lisp :tangle yes
+     (defun imentend-dialog-menu (param-name)
+       (let((param-values 'nil)
+            (readed-value '()))
+         (setq readed-value (read-string (concat param-name " ") ""))
+         (if (not (equal readed-value ""))
+             (progn
+               (add-to-list 'param-values 'readed-value)
+               (imentend-dialog-menu param-name)))
+         param-values))          
+   #+end_src
+   
+   #+begin_src emacs-lisp :tangle yes
+     (defun dokerize-current-project ()
+       "Dialog-mode for creating new dockerfile"
+       (interactive)
+       (beginning-of-buffer)
+       (setq docker-image-name (read-string "Image prefix" "def-image"))
+       (insert
+        (concat
+         "FROM " (read-string "FROM: " "python:3.5") "\n"
+         "ENV " (read-string "ENV: " "PYTHONBUFFER 1") "\n"
+         "WORKDIR " (read-string "WORKDIR: " (concat "/srv/" docker-image-name "")) "\n"
+         "ARG " (read-string "ARG: " (concat "DEPLOY_KEY=docker/" docker-image-name "/.ssh/id_rsa")) "\n"
+         "COPY " (read-string "COPY: " "requirements.txt requirements.txt") "\n"
+         "RUN " (read-string "RUN: " "curl -sL https://deb.nodesource.com/setup_8.x | bash \\") "\n"
+         " && apt" (read-string " && apt: " "-get install -y nodejs rsync \\") "\n"
+         " && npm " (read-string " && npm: " "install -g bower \\") "\n"
+         " && pip " (read-string " && pip: " "install --no-cache-dir -r requirements.txt \\") "\n"
+         " && rm " (read-string " && rm: " "-fr /var/lib/apt/lists/* /tmp/* /var/tmp/*") "\n"
+
+         "ENTRYPOINT " (read-string "ENTRYPOINT: " "./manage.py") "\n"
+
+         "COPY " (read-string "COPY: " ". .") "\n"
+
+         "RUN " (read-string "RUN: " "npm update \\") "\n"
+         " && bower" (read-string " && bower: " "update --allow-root") "\n"
+         )))
+
+   #+end_src
+   - Опционально: docker-compose
+   - Jenkinsfile
