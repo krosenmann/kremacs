@@ -17,6 +17,9 @@
 (add-to-list 'load-path "~/kremacs/plugins/telega.el/")
 (add-to-list 'load-path "~/kremacs/plugins/elisp/")
 
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+
 (require 'git)
 (require 'linum+)
 (setq linum-format "%d")
@@ -34,11 +37,13 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages"))
 (package-initialize)
 (load-file "~/kremacs/init-org.el")
 (load-file "~/kremacs/init-ccpp.el")
 (load-file "~/kremacs/init-python.el")
 (load-file "~/kremacs/init-lisp.el")
+
 
 (require 'bookmark+)
 (bmkp-toggle-auto-light-when-jump)
@@ -64,3 +69,4 @@
 ;;       yt-password "tGLSZL"
 ;;       yt-project "[MS] PollyCRM"
 ;;       yt-user "zayrullin")
+(load-file "~/kremacs/init-docker.el")

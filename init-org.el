@@ -21,7 +21,7 @@
    (emacs-lisp . t)
    (lilypond  t)
    ))
-(add-to-list
+(add-to-list 
  'org-src-lang-modes '("plantuml" . plantuml))
 
 (setq org-ditaa-jar-path "/usr/bin/ditaa")
@@ -29,22 +29,15 @@
 (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 (require 'open-djvu-external)
 (require 'start-new-org)
+(require 'org2jekyll)
+
+
+
 
 ;; List of additional LaTeX packages
 ;(add-to-list 'org-export-latex-packages-alist '("" "cmap" t))
 ;(add-to-list 'org-export-latex-packages-alist '("english,russian" "babel" t))
 
-;;webkit
-;; Don't need anymore
-;;(add-to-list 'load-path "~/kremacs/plugins/webkit")
-;;(add-to-list 'load-path "~/kremacs/plugins/emacs-epc")
-;;(add-to-list 'load-path "~/kremacs/plugins/emacs-deferred")
-;;(add-to-list 'load-path "~/kremacs/plugins/emacs-ctable")
-;;(require 'webkit)
-
-
-
-;; (eval-when-compile (require 'starters "~/kremacs/plugins/starters.el"))
 ;; (require 'ox-cv)
 ;; (add-to-list 'org-latex-classes
 ;;              '("mymoderncv"
