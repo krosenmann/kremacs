@@ -30,6 +30,22 @@
 (require 'open-djvu-external)
 (require 'start-new-org)
 
+(require 'org2web)
+
+(org2web-add-project
+ '("krosenmann.gihub.io"
+   :repository-directory "~/krosenmann.github.io"
+   :remote (git "https://github.com/krosenmann/krosenmann.github.io.git" "master")
+   :site-domain "http://krosenmann.github.io/"
+   :site-main-title "KRoSenmann d-blog"
+   :site-sub-title "Jokes, Math, Programming"
+   :theme (worg)
+   :source-browse-url ("Github" "https://github.com/krosenmann/krosenmann.github.io")
+   :personal-duoshuo-shortname "krosenmann-website"
+   :web-server-port 7654))
+
+
+
 ;; List of additional LaTeX packages
 ;(add-to-list 'org-export-latex-packages-alist '("" "cmap" t))
 ;(add-to-list 'org-export-latex-packages-alist '("english,russian" "babel" t))
