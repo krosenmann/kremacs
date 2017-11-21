@@ -34,6 +34,7 @@
   ;; Paste a ipdb breakpoint
   (interactive)
   (insert "from IPython.core.debugger import Tracer; Tracer()()")
+  (bookmark-set "Breakpoint")
  )
 
                                         ;TODO: Довести функциlю до норм очистки
@@ -45,7 +46,10 @@
 
 (defun python-extend-keymap ()
   "Extended keymaps for python-mode"
-  (local-set-key (kbd "<f6>") 'python-bp))
+  (local-set-key (kbd "<f6>") 'python-bp)
+  (local-set-key (kbd "C-,") 'flymake-goto-next-error)
+  (local-set-key (kbd "C-.") 'flymake-goto-prev-error)
+  (local-set-key (kbd "C-'") 'flymake-popup-current-error-menu))
 
 (defun virtual-env-focus-hook ()
   "Hook for activate virtualenv on focus"

@@ -7,7 +7,7 @@
 ;; for nw version
 (global-set-key (kbd "<f15>") 'other-window)
 
-(set-face-attribute 'default nil :height 107)
+(set-face-attribute 'default nil :height 90)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -60,8 +60,7 @@
 (require 'semantic/sb)
 (semantic-mode 1)
 (require 'semantic/ia)
-
-(add-to-list 'auto-mode-alist '("\\*.pu" . plantuml-mode))
+(require 'diff-hl)
 (require 'telega)
 
 ;; (require 'youtrack)
@@ -70,3 +69,7 @@
 ;;       yt-project "[MS] PollyCRM"
 ;;       yt-user "zayrullin")
 (load-file "~/kremacs/init-docker.el")
+(display-time-mode 1)
+(add-to-list 'prog-mode-hook 'diff-hl-mode)
+(add-to-list 'org-mode-hook 'diff-hl-mode)
+(global-undo-tree-mode)
