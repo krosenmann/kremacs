@@ -7,7 +7,7 @@
 ;; for nw version
 (global-set-key (kbd "<f15>") 'other-window)
 
-(set-face-attribute 'default nil :height 107)
+;; (set-face-attribute 'default nil :height 90)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -16,6 +16,9 @@
 (add-to-list 'load-path "~/kremacs/plugins/")
 ;; (add-to-list 'load-path "~/kremacs/plugins/telega.el/")
 (add-to-list 'load-path "~/kremacs/plugins/elisp/")
+
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
 
 (require 'git)
 (require 'linum+)
@@ -34,11 +37,13 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages"))
 (package-initialize)
 (load-file "~/kremacs/init-org.el")
 (load-file "~/kremacs/init-ccpp.el")
 (load-file "~/kremacs/init-python.el")
 (load-file "~/kremacs/init-lisp.el")
+
 
 (require 'bookmark+)
 (bmkp-toggle-auto-light-when-jump)
@@ -55,9 +60,7 @@
 (require 'semantic/sb)
 (semantic-mode 1)
 (require 'semantic/ia)
-
-(add-to-list 'auto-mode-alist '("\\*.pu" . plantuml-mode))
-;; (require 'telega)
+(require 'diff-hl)
 
 ;; (require 'youtrack)
 ;; (setq yt-baseurl "https://youtrack.220v.ru/"
@@ -66,3 +69,7 @@
 ;;       yt-user "zayrullin")
 
 (require 'tex-site)
+(display-time-mode 1)
+(add-to-list 'prog-mode-hook 'diff-hl-mode)
+(add-to-list 'org-mode-hook 'diff-hl-mode)
+(global-undo-tree-mode)
