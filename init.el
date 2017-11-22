@@ -62,12 +62,6 @@
 (require 'semantic/ia)
 (require 'diff-hl)
 
-;; (require 'youtrack)
-;; (setq yt-baseurl "https://youtrack.220v.ru/"
-;;       yt-password "tGLSZL"
-;;       yt-project "[MS] PollyCRM"
-;;       yt-user "zayrullin")
-
 (require 'tex-site)
 (display-time-mode 1)
 (add-to-list 'prog-mode-hook 'diff-hl-mode)

@@ -5,30 +5,30 @@
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
-(eval-after-load "python"
-  '(progn
-     (setcar python-font-lock-keywords
-             (rx symbol-start
-                 (or
-                  "and" "del" "from" "not" "as" "elif" "global" "or" "with"
-                  "assert" "else" "if" "pass" "yield" "break" "except" "import" "class"
-                  "in" "raise" "continue" "finally" "is" "return" "def" "for" "lambda"
-                  "try"
-                  ;; Python 2:
-                  "print" "exec"
-                  ;; Python 3:
-                  ;; False, None, and True are listed as keywords on the Python 3
-                  ;; documentation, but since they also qualify as constants they are
-                  ;; fontified like that in order to keep font-lock consistent between
-                  ;; Python versions.
-                  "nonlocal"
-                  ;; Python 3.5+ PEP492
-                  (and "async" (+ space) (or "def" "for" "with"))
-                  "await"
-                  ;; Extra:
-                  "self")
-                 symbol-end))
-     ))
+;; (eval-after-load "python"
+;;   '(progn
+;;      (setcar python-font-lock-keywords
+;;              (rx symbol-start
+;;                  (or
+;;                   "and" "del" "from" "not" "as" "elif" "global" "or" "with"
+;;                   "assert" "else" "if" "pass" "yield" "break" "except" "import" "class"
+;;                   "in" "raise" "continue" "finally" "is" "return" "def" "for" "lambda"
+;;                   "try"
+;;                   ;; Python 2:
+;;                   "print" "exec"
+;;                   ;; Python 3:
+;;                   ;; False, None, and True are listed as keywords on the Python 3
+;;                   ;; documentation, but since they also qualify as constants they are
+;;                   ;; fontified like that in order to keep font-lock consistent between
+;;                   ;; Python versions.
+;;                   "nonlocal"
+;;                   ;; Python 3.5+ PEP492
+;;                   (and "async" (+ space) (or "def" "for" "with"))
+;;                   "await"
+;;                   ;; Extra:
+;;                   "self")
+;;                  symbol-end))
+;;      ))
 
 (defun python-bp()
   ;; Paste a ipdb breakpoint
