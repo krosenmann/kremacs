@@ -26,6 +26,7 @@
 (global-linum-mode 1)
 (eldoc-mode t)
 (emojify-mode t)
+
 ;;built-in
 (require 'ido)
 (ido-mode t)
