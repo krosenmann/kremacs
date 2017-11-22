@@ -25,7 +25,7 @@
 (setq linum-format "%d")
 (global-linum-mode 1)
 (eldoc-mode t)
-
+(emojify-mode t)
 ;;built-in
 (require 'ido)
 (ido-mode t)
@@ -62,7 +62,7 @@
 (require 'semantic/ia)
 (require 'diff-hl)
 
-(require 'tex-site)
+;; (require 'tex-site)
 (display-time-mode 1)
 (add-to-list 'prog-mode-hook 'diff-hl-mode)
 (add-to-list 'org-mode-hook 'diff-hl-mode)
