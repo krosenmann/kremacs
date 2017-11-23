@@ -14,14 +14,16 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
-   ;; (sh . t)
+   (shell . t)
    (plantuml . t)
    (ditaa . t)
    (emacs-lisp . t)
-   (lilypond  t)
+   (lilypond . t)
    ))
-(add-to-list 
+(add-to-list
  'org-src-lang-modes '("plantuml" . plantuml))
+
+(setq org-babel-python-command "python3")
 
 (setq org-ditaa-jar-path "/usr/bin/ditaa")
 (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
