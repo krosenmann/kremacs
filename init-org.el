@@ -45,7 +45,9 @@
    :personal-duoshuo-shortname "krosenmann-website"
    :web-server-port 7654))
 
-
+(setq org-confirm-babel-evaluate nil)
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)   
+(add-hook 'Org-mode-hook 'org-display-inline-images)
 
 ;; List of additional LaTeX packages
 ;(add-to-list 'org-export-latex-packages-alist '("" "cmap" t))
