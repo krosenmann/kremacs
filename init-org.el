@@ -4,8 +4,9 @@
 
 ;;org-mode upgrade
 (define-key global-map "\C-ca" 'org-agenda)
+(setq org-agenda-files (list "~/Dropbox/docs"))
 (setq org-log-done t)
-(setq org-todo-keywords '((sequence "URGENTLY!!!" "TODO" "IN_PROCESS" "FEEDBACK" "|" "DONE" "CANCELED")))
+(setq org-todo-keywords '((sequence "TODO" "IN_PROCESS" "FEEDBACK" "|" "DONE" "CANCELED")))
 (setq org-src-fontify-natively 't)
 
 (setq org-icalendar-use-deadline '(todo-due event-if-todo))
@@ -19,6 +20,9 @@
    (ditaa . t)
    (emacs-lisp . t)
    (lilypond . t)
+   (http . t)
+   (haskell . t)
+   (C . t)
    ))
 (add-to-list
  'org-src-lang-modes '("plantuml" . plantuml))
@@ -46,8 +50,9 @@
    :web-server-port 7654))
 
 (setq org-confirm-babel-evaluate nil)
-(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)   
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 (add-hook 'Org-mode-hook 'org-display-inline-images)
+(add-hook 'Org-mode-hook 'flyspell-mode)
 
 ;; List of additional LaTeX packages
 ;(add-to-list 'org-export-latex-packages-alist '("" "cmap" t))

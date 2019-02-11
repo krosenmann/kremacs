@@ -1,30 +1,100 @@
-* Using
-  In .emacs:
-#+BEGIN_SRC elisp
-  (add-hook 'after-init-hook (lambda() (load-file "~/kremacs/init.el")))
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:t todo:t |:t
+#+TITLE: KrEmacss: Krosenmann's Emacs dotfiles
+#+DATE: <2018-11-04 Вс>
+#+AUTHOR: krosenmann
+#+EMAIL: krosenmann@gmail.com
+#+LANGUAGE: ru
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 27.0.50 (Org mode 9.1.9)
+
+* Установка
+  Сначала определяем архив с пакетами, он будет использоваться для
+  проверки и установки пакетов. 
+  #+BEGIN_SRC elisp
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+  #+END_SRC
 
+  Конфигурация сильно завязана на внешние пакеты, поэтому перед
+  запуском проверяем их наличие, и устанавалием при отсутствии.
+  [[https://stackoverflow.com/a/10095853/7269114][Источник]]
+  #+BEGIN_SRC elisp
+    (defun ensure-package-installed (&rest packages)
+      "Assure every package is installed, ask for installation if it’s not.
 
-  (add-hook 'after-init-hook (lambda () (require 'yasnippet)
-                               (yas-global-mode 1)
-                               ))
+    Return a list of installed packages or nil for every skipped package."
+      (mapcar
+       (lambda (package)
+         ;; (package-installed-p 'evil)
+         (if (package-installed-p package)
+             nil
+           (if (y-or-n-p (format "Package %s is missing. Install it? " package))
+               (package-install package)
+             package)))
+       packages))
 
-#+END_SRC
+    ;; make sure to have downloaded archive description.
+    ;; Or use package-archive-contents as suggested by Nicolas Dudebout
+    (or (file-exists-p package-user-dir)
+        (package-refresh-contents))
 
-* package-list
-#+BEGIN_SRC 
-  2048-game pandoc pandoc-mode geiser quack pydoc-info sx
-  flymake-python-pyflakes company-jedi company-shell importmagic
-  pytest yasnippet web-mode seq pyvenv python-info pyenv-mode-auto
-  pydoc py-autopep8 plantuml-mode pdf-tools paperless package-lint
-  markdown-mode+ jedi-direx ecb django-mode django-manage
-  company-quickhelp company-irony company-c-headers company-anaconda
-  auto-org-md all-the-icons-dired
-#+END_SRC
+    (ensure-package-installed 
+     <<Зависимости>>
+    )
 
-* dependencies
-#+BEGIN_SRC sh
-sudo apt install cppcheck ditaa plantuml
-#+END_SRC
+    ;; activate installed packages
+    (package-initialize)
+  #+END_SRC
+  
+* Core
+  Отключить меню и тулбар для экономии места
+  #+BEGIN_SRC elisp
+    (menu-bar-mode -1)
+    (tool-bar-mode -1)
+    (setq auto-save-default nil)
+  #+END_SRC
+
+  Мне нравится переключаться между окнами циклически через =S-f3=. Для
+  nowindow-версии емакса это сочетание дает =f15=
+  #+BEGIN_SRC elisp
+  (global-set-key (kbd "S-<f3>") 'other-window)
+  (global-set-key (kbd "<f15>") 'other-window)
+  #+END_SRC
+
+  Основная кодировка, и пара обязательных параметров для посдветки
+  скобок.
+  #+BEGIN_SRC elisp
+  (prefer-coding-system 'utf-8)
+  (setq show-paren-style 'expression)
+  (show-paren-mode 2)
+  #+END_SRC
+** Внешний вид
+   Показывать номера строк 
+   #+BEGIN_SRC elisp
+   (require 'linum+)
+   (setq linum-format "%d")
+   (global-linum-mode 1)
+   #+END_SRC
+*** Темы
+*** modeline
+* Работа с документацией (Info-mode)
+   
+* Org-mode
+
+* Программирование
+** Работа с проектами  
+** Контроль версий
+** Lisp
+** Python
+** C
+** Rust
+
+* 
+** Почта
+** twitter
+** 
