@@ -1,6 +1,6 @@
 (require 'org)
 
-(setq org-src-fontify-natively t)
+(setq org-src-fontify-natively 'nil)
 
 ;;org-mode upgrade
 (define-key global-map "\C-ca" 'org-agenda)
