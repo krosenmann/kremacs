@@ -3,7 +3,7 @@
 #+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
 #+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+OPTIONS: timestamp:t title:t toc:t todo:t |:t
-#+TITLE: KrEmacss: Krosenmann's Emacs dotfiles
+#+TITLE: KrEmacs: Krosenmann's Emacs dotfiles
 #+DATE: <2018-11-04 Вс>
 #+AUTHOR: krosenmann
 #+EMAIL: krosenmann@gmail.com
@@ -16,6 +16,9 @@
 #+PROPERTY: header-args+ :tangle src/init.el
 
 * Установка
+  Сборка: ~make~
+  Установка: ~make install~
+
   Сначала определяем архивы с пакетами, они будут использоваться для
   проверки и установки пакетов. 
   #+BEGIN_SRC elisp 
@@ -49,7 +52,7 @@
 	(package-refresh-contents))
 
     (ensure-package-installed 
-     '<<Зависимости>>
+     '<<dependencies>>
     )
 
     ;; activate installed packages
@@ -89,12 +92,11 @@
    (setq linum-format "%d")
    (global-linum-mode 1)
    #+END_SRC
-*** COMMENT Темы
+*** Темы
     Время от времени, я меняю темы, чтобы не приедалось.
     Темы я выбираю попарно: для работы-работы, и работа-дома, то есть до кучи переключаюсь между двумя в течении дня.
     Список тем и паков, которые мне приглянулись за время работы в Emacs:
-    #+NAME: Зависимости
-    #+BEGIN_SRC elisp :tangle no
+    #+BEGIN_SRC elisp :tangle no :noweb-ref dependencies
       cyberpunk-theme
       doom-themes
       dracula-theme
@@ -102,13 +104,12 @@
       leuven-theme
     #+END_SRC
 *** modeline
-    В качестве mode line мне больше всего приглянулся проект [[https://github.com/dbordak/telephone-line][telephone-line]]
-    #+NAME: Зависимости
-    #+BEGIN_SRC elisp :tangle no
+    В качестве mode line мне больше всего понравился проект [[https://github.com/dbordak/telephone-line][telephone-line]]
+    #+BEGIN_SRC elisp :tangle no :noweb-ref dependencies
       telephone-line
     #+END_SRC
 
-    Настраивать можно только перед запуском
+    Настраивать можно только перед запуском (почти дефолт используется)
     #+BEGIN_SRC elisp
       (defface telephone-line-projectile
 	'((t (:foreground "red" :bold t :inherit mode-line)))
@@ -118,15 +119,24 @@
       (require 'telephone-line)
       (telephone-line-mode 1)
     #+END_SRC
+*** Сниппеты
+    Сниппеты я использую очень активно практически во всех режимах.
+    #+BEGIN_SRC elisp :tangle no :noweb-ref dependencies 
+      yasnippet
+      yasnippet-snippets
+    #+END_SRC
 * Работа с документацией (Info-mode)
    
 * Org-mode
-  Устанавливаем последнюю версию полного (почти) комплекта орг-мода
-  #+NAME: Зависимости
-  #+BEGIN_SRC elisp :tangle no
-    org-plus-contrib
+  Устанавливаем последнюю версию орг-мода, софт для проверки правописания
+  #+BEGIN_SRC elisp :tangle no :noweb-ref dependencies
+    org
   #+END_SRC
   
+  Включаем проверкy правописания
+  #+BEGIN_SRC elisp
+  (add-hook 'Org-mode-hook 'flyspell-mode)
+  #+END_SRC
  
 ** Как органайзер
    Для использования в качестве органайзера, цепляем Agenda View, биндим на синхронизирующиеся с Orgzly файлы, и зададим некоторые дополнительные ключевые слова для более удобной работы. Желательно добавить их и в orgzly.
@@ -135,12 +145,51 @@
      (setq org-agenda-files (list "~/Dropbox/docs"))
      (setq org-log-done t)
      (setq org-todo-keywords '((sequence "TODO" "IN_PROCESS" "FEEDBACK" "|" "DONE" "CANCELED")))
+     (setq org-icalendar-use-deadline '(todo-due event-if-todo))
+     (setq org-icalendar-use-scheduled '(event-if-todo))
    #+END_SRC
-  
+
+** Документы, RR и Literate Programming
+   По дефолту емакс не показывает вставленные изображения, а так же отрубает их при динамеском вычислении. 
+   #+begin_src elisp
+     (setq org-startup-with-inline-images 1)
+     (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+   #+end_src
+
+   Устанавливаем и подключаем поддержку языков для babel
+   #+BEGIN_SRC elisp
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((python . t)
+	(shell . t)
+	(plantuml . t)
+	(ditaa . t)
+	(emacs-lisp . t)
+	(lilypond . t)
+	(http . t)
+	(haskell . t)
+	(C . t)
+	(rust . t)
+	))
+   #+END_SRC
+
+   Недостающие в списке языки подустанавливаем и подкидываем дополнительные пакеты для облегчения жизни
+   #+BEGIN_SRC elisp :tangle no :noweb-ref dependencies 
+     ob-http
+     ob-rust
+     ob-async
+   #+END_SRC
+
+** Экспорт
+   Для HTML
+   #+BEGIN_SRC elisp :tangle no :noweb-ref dependencies
+     htmlize
+   #+END_SRC
 * Программирование
 ** Работа с проектами  
 ** Контроль версий
 ** Lisp
+** Shell
 ** Python
 ** C
 ** Rust

@@ -1,6 +1,6 @@
 PDIR=~/sources/kremacs
 
-all: tangle
+all: tangle dependencies
 
 tangle:
 	mkdir $(PDIR)/src
@@ -9,6 +9,9 @@ tangle:
 
 install:
 	cp $(PDIR)/src/*.el ~/.emacs.d/
+
+dependencies:
+	sudo apt install aspell ditaa plantuml
 
 clean:
 	rm -rf $(PDIR)/src
